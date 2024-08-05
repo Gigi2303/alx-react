@@ -1,9 +1,17 @@
 import { getFullYear, getFooterCopy, getLatestNotification } from './utils';
 
-test('returns current year', () => {
+beforeAll(() => {
+	jest.spyOn(global.Date.prototype, 'getFullYear').mockReturnValue(2021);
+  });
+  
+  afterAll(() => {
+	jest.restoreAllMocks();
+  });
+  
+  test('returns current year', () => {
 	expect(getFullYear()).toBe(2021);
-});
-
+  });
+  
 test('correct footer copy', () => {
 	expect(getFooterCopy(true)).toBe('Holberton School');
 	expect(getFooterCopy(false)).toBe('Holberton School main dashboard');
